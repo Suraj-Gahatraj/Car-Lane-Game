@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>A car Dodge Game</title>
+        <style>
+            * { padding:0;margin:0;}
+                canvas {background:rgb(0, 0, 0);display:block;margin:0 auto;}
+            
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="400" height="600"></canvas>
+        <script>
+           var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+var x = canvas.width/2;
+var y = canvas.height-30;
+
+
+var obstacle_x=133.3/2;
+var obstacle_y=0;
+
+
+    ctx.beginPath();
+    ctx.rect(133.3,0, 2,600);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(2*133.3,0, 2,600);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+
+    
+
+
+
+
+
+
+
+
+//cuttin off from here
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function keyDownHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = true;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = true;
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
+    }
+}
+
+
+
+function drawTrack()
+{
+    ctx.beginPath();
+    ctx.rect(133.3,0, 2,600);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(2*133.3,0, 2,600);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+
+}
+
+
+
+
+function drawObstacles()
+{
+    ctx.beginPath();
+    ctx.rect(obstacle_x,obstacle_y, 2,60);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(2*133+60.3,obstacle_y, 2,60);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(2*133.3/2+133.3/2,obstacle_y, 2,60);
+    ctx.fillStyle = "yellow";
+    ctx.fill();
+    ctx.closePath();
+}
+
+
+
+
+
+
+
+function drawCar() {
+    ctx.beginPath();
+    ctx.rect(x, y, 20,30);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+}
+
+
+
+
+
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+ 
+     drawTrack();
+    drawCar();
+    drawObstacles();
+    obstacle_y+=1;
+    console.log(rightPressed);
+    if(rightPressed && x < canvas.width-20) {
+        x += 2;
+    }
+    else if(leftPressed && x> 0) {
+        x -=2;
+    }
+    
+    
+}
+
+var interval = setInterval(draw, 10);
+
+
+
+
+        </script>
+    </body>
+</html>
